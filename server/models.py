@@ -18,7 +18,10 @@ class Project(db.Model):
     __tablename__ = "projects"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
+    description = db.Column(db.String)
     client_id = db.Column(db.Integer, db.ForeignKey('clients.id'), nullable=False)
+    due_date = db.Column(db.DateTime)
+    active = db.Column(db.Boolean)
 
 class ProjectItems(db.Model):
     __tablename__ = "projectitems"
