@@ -45,3 +45,11 @@ class Projects(Resource):
         return response
 
 api.add_resource(Projects, "/projects")
+
+class Clients(Resource):
+    def get(self):
+        pass
+    def post(self):
+        pass
+
+api.add_resource(Clients, "/clients")

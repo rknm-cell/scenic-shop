@@ -24,14 +24,20 @@ class Project(db.Model):
     # due_date = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
 
-class ProjectItems(db.Model):
+class Item(db.Model):
     __tablename__ = "projectitems"
     id = db.Column(db.Integer)
     name = db.Column(db.String)
     description = db.Column(db.String)
+    paint_id = db.ForeignKey(db.Integer, db.ForeignKey('paint.id'))
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=False)
 
-
+class Paint(db.Model):
+    __tablename__ = "paints"
+    id = db.Column(db.Integer)
+    name = db.Column(db.String)
+    color = db.Column(db.String)
+    item_id = db.relationship('Item', backref='paint')
 class Client(db.Model):
     __tablename__ = "clients"
     name = db.Column(db.String, unique=True, nullable=False)
