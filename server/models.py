@@ -12,15 +12,16 @@ class User(db.Model):
 class Department(db.Model):
     __tablename__ = "departments"
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, unique=True, nullable=false)
+    name = db.Column(db.String, unique=True, nullable=False)
+    description = db.Column(db.String)
 
 class Project(db.Model):
     __tablename__ = "projects"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     description = db.Column(db.String)
-    client_id = db.Column(db.Integer, db.ForeignKey('clients.id'), nullable=False)
-    due_date = db.Column(db.DateTime)
+    client_id = db.Column(db.Integer, db.ForeignKey('client.id'), nullable=False)
+    # due_date = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
 
 class ProjectItems(db.Model):
@@ -28,12 +29,11 @@ class ProjectItems(db.Model):
     id = db.Column(db.Integer)
     name = db.Column(db.String)
     description = db.Column(db.String)
-    project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=False)
 
 
 class Client(db.Model):
     __tablename__ = "clients"
-    projects = db.relationshiop('Projects', backref='clients')
+    name = db.Column(db.String, unique=True, nullable=False)
+    projects = db.relationship('Project', backref='client', lazy=True)
 
-class ClientProjects(db.Model):
-    __tablename__ = "clientprojects"    
