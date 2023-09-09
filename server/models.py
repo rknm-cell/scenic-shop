@@ -8,13 +8,14 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String)
+    department = db.Column(db.String, db.ForeignKey('departments.name'), )
 
 class Department(db.Model):
     __tablename__ = "departments"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True, nullable=False)
     description = db.Column(db.String)
-    items = db.relationship('Item', backref='department')
+    items = db.relationship('Item', backref='departments')
 
 class Project(db.Model):
     __tablename__ = "projects"
@@ -44,5 +45,6 @@ class Client(db.Model):
     __tablename__ = "clients"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True, nullable=False)
+    description = db.Column(db.String)
     projects = db.relationship('Project', backref='clients', lazy=True)
 
