@@ -3,15 +3,17 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request, make_response
+from flask import Flask, request, make_response
 from flask_restful import Resource
+from flask_sqlalchemy import SQLAlchemy
 
 # Local imports
 from config import app, db, api
 # Add your model imports
+from models import Project, Client, Item, User, Department
 
 
-# Views go here!
+
 
 class Projects(Resource):
     def get(self):
@@ -30,7 +32,7 @@ class Projects(Resource):
             name = request.json['name'],
             description = request.json['description'],
             client_id = request.json['client_id'],
-            due_date = request.json['due_date']
+            
         )
 
         db.session.add(new_project)
@@ -53,3 +55,6 @@ class Clients(Resource):
         pass
 
 api.add_resource(Clients, "/clients")
+
+if __name__ == '__main__':
+    app.run(port=5555, debug=True)

@@ -14,32 +14,35 @@ class Department(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True, nullable=False)
     description = db.Column(db.String)
+    items = db.relationship('Item', backref='department')
 
 class Project(db.Model):
     __tablename__ = "projects"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     description = db.Column(db.String)
-    client_id = db.Column(db.Integer, db.ForeignKey('client.id'), nullable=False)
+    client_id = db.Column(db.Integer, db.ForeignKey('clients.id'), nullable=False)
     # due_date = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
-
-class Item(db.Model):
-    __tablename__ = "projectitems"
-    id = db.Column(db.Integer)
-    name = db.Column(db.String)
-    description = db.Column(db.String)
-    paint_id = db.ForeignKey(db.Integer, db.ForeignKey('paint.id'))
-    project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=False)
-
 class Paint(db.Model):
     __tablename__ = "paints"
-    id = db.Column(db.Integer)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     color = db.Column(db.String)
-    item_id = db.relationship('Item', backref='paint')
+    item_id = db.relationship('Item', backref='paints')
+
+class Item(db.Model):
+    __tablename__ = "items"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    description = db.Column(db.String)
+    current_department = db.Column(db.Integer, db.ForeignKey('departments.id'))
+    paint_id = db.Column(db.Integer, db.ForeignKey('paints.id'))
+    project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
+
 class Client(db.Model):
     __tablename__ = "clients"
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True, nullable=False)
-    projects = db.relationship('Project', backref='client', lazy=True)
+    projects = db.relationship('Project', backref='clients', lazy=True)
 

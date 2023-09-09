@@ -8,7 +8,7 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, User, Department, Project, ProjectItems, Client, ClientProjects
+from models import db, User, Department, Project, Client
 
 if __name__ == '__main__':
     fake = Faker()
@@ -30,7 +30,8 @@ if __name__ == '__main__':
 
         print("Seeding clients")
         client1 = Client("Jewelry store", "High end jewelry brand")
-        clients = [client1]
+        client2 = Client("Animation company", "Feature film animation studio")
+        clients = [client1, client2]
         db.session.add_all(clients)
         db.session.commit()
         
