@@ -8,7 +8,7 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, User, Department, Project, Client
+from models import db, User, Department, Project, Client, Item
 
 if __name__ == '__main__':
     fake = Faker()
@@ -40,6 +40,8 @@ if __name__ == '__main__':
         projects = [project1]
         db.session.add_all(projects)
         db.session.commit()
+        print("Seeding items")
+        item1 = Item
 
         print("Seeding ProjectItems")
         # Seed code goes here!

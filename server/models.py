@@ -1,14 +1,24 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.orm import validates
 
 from config import db
 
 class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String, unique=True, nullable=False)
+    name = db.Column(db.String, unique=True, nullable=False)
+    title = db.Column(db.String)
     email = db.Column(db.String)
     department = db.Column(db.String, db.ForeignKey('departments.name'), )
+
+    @validates('department')
+    def validates_department(self, key, department):
+        departments = Department.query.all()
+        department_name = [self.department for department in departments]
+        if department not in department_name:
+            raise ValueError('Must be a valid department')
+        return department
 
 class Department(db.Model):
     __tablename__ = "departments"
@@ -36,6 +46,7 @@ class Item(db.Model):
     __tablename__ = "items"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
+    number = db.Column(db.Integer)
     description = db.Column(db.String)
     current_department = db.Column(db.Integer, db.ForeignKey('departments.id'))
     paint_id = db.Column(db.Integer, db.ForeignKey('paints.id'))
