@@ -50,9 +50,43 @@ api.add_resource(Projects, "/projects")
 
 class Clients(Resource):
     def get(self):
-        pass
+        projects_dict = [projects.to_dict(only = ("id", "name", "description", "projects")) for projects in Project.query.all()]
+
+        response = make_response(
+            projects_dict,
+            200
+        )
+
+        return response
+    
     def post(self):
-        pass
+        
+        new_project = Client(
+            name = request.json['name'],
+            description = request.json['description'],
+            
+            
+        )
+
+        db.session.add(new_project)
+        db.session.commit()
+
+        new_project_dict = new_project.to_dict()
+        
+        response = make_response(
+            new_project_dict,
+            201
+        )
+        return response
+    
+    def delete(self, parent_id):
+        parent = Client.query.get(parent_id)
+        if parent:
+            db.session.delete(parent)
+            db.session.commit()
+            return {"message": "Client and associated records deleted successfully."}
+        else:
+            return {"message": "Parent not found."}, 404
 
 api.add_resource(Clients, "/clients")
 

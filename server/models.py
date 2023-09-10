@@ -15,7 +15,7 @@ class User(db.Model):
     @validates('department')
     def validates_department(self, key, department):
         departments = Department.query.all()
-        department_name = [self.department for department in departments]
+        department_name = [self.department for name in departments]
         if department not in department_name:
             raise ValueError('Must be a valid department')
         return department
