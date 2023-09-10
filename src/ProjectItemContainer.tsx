@@ -1,7 +1,9 @@
 import React from 'react'
 
-export const ProjectItemContainer = () => {
+const ProjectItemContainer = () => {
   return (
     <div>ProjectItemContainer</div>
   )
 }
+
+export default ProjectItemContainer
