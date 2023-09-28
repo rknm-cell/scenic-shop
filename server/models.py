@@ -32,7 +32,7 @@ class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     description = db.Column(db.String)
-    client_id = db.Column(db.Integer, db.ForeignKey('clients.id'), nullable=False)
+    client_id = db.Column(db.Integer, db.ForeignKey('clients.id'), nullable=False, ondelete='CASCADE')
     # due_date = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
 class Paint(db.Model):
@@ -57,5 +57,5 @@ class Client(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True, nullable=False)
     description = db.Column(db.String)
-    projects = db.relationship('Project', backref='clients', lazy=True)
+    projects = db.relationship('Project', backref='clients', cascade='all, delete-orphan', passive_deletes=True)
 
