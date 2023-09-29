@@ -1,8 +1,9 @@
 import React from 'react'
+import ClientCard from './ClientCard'
 
 const ClientContainer = () => {
   return (
-    <div>ClientContainer</div>
+    <ClientCard />
   )
 }
 
