@@ -21,12 +21,17 @@ function App() {
             <ul>
               <li>
                 <Link to="/">Home</Link>
+                <Link to="/projects">Projects</Link>
+                <Link to="/clients">Clients</Link>
               </li>
             </ul>
           </nav>
 
           <Route path="/">
             <Home />
+          </Route>
+          <Route path="/projects">
+            <Projects />
           </Route>
         </div>
       </Router>
