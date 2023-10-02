@@ -1,9 +1,11 @@
 import React from "react";
+import DepartmentCard from "./DepartmentCard";
 
 const Department = () => {
   return (
     <>
-      <h1>Department</h1>
+      <h1>Departments</h1>
+      <DepartmentCard />
     </>
   );
 };
