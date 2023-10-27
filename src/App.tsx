@@ -2,18 +2,35 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Home from "./Home";
 import "./App.css";
+import { Projects } from "./Projects";
 
 function App() {
-  const [count, setCount] = useState(0);
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(()=> {
-    fetch("/projects")
-    .then(response => response.json())
-    .then(data => setProjects(data))
-  }, [])
+  useEffect(() => {
+    // Define the URL of the API endpoint where your projects are hosted.
+    const apiUrl = 'https://api.example.com/projects'; // Replace with your API endpoint URL.
+
+    fetch(apiUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setProjects(data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      });
+  }, []);
 
   return (
+    
     <>
       <Router>
         <div>
@@ -31,7 +48,7 @@ function App() {
             <Home />
           </Route>
           <Route path="/projects">
-            <Projects />
+            <Projects projects={projects}/>
           </Route>
         </div>
       </Router>

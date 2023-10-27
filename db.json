@@ -1,0 +1,17 @@
+{
+    "projects": [
+      {
+        "name": "Bakugan",
+        "colors": ["pomegranate", "golden arch", "stone gray", "strawberry red"],
+        "due_date": "November 15",
+        "client": "Saatchi x Saatchi"
+      },
+      {
+        "name": "Loro Piana",
+        "colors": ["walnut stain"],
+        "due_date": "September 30",
+        "client": "Pard Group",
+        "active": false
+      }
+    ]
+  }
