@@ -1,8 +1,13 @@
 import React from 'react'
 
-const DepartmentCard = () => {
+const DepartmentCard = (department) => {
+
+  
+    
+
+  }
   return (
-    <div>DepartmentCard</div>
+    <></>
   )
 }
 
