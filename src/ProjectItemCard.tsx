@@ -1,8 +1,12 @@
 import React from 'react'
 
-const ProjectItemCard = () => {
+const ProjectItemCard = ({project}) => {
   return (
-    <div>ProjectItemCard</div>
+    <>
+    <h1>{project.name}</h1>
+    <p>{project.description}</p>
+    <p>{project.colors}</p>{}
+    </>
   )
 }
 

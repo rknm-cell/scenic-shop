@@ -11,7 +11,7 @@ const Department = ({departments}) => {
   return (
     <>
       <h1>Departments</h1>
-      <DepartmentCard deparmtnet={department}/>
+      {handleDeptRender()}
     </>
   );
 };
