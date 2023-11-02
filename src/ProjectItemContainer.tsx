@@ -1,8 +1,9 @@
 import React from 'react'
+import ProjectItemCard from './ProjectItemCard'
 
 const ProjectItemContainer = () => {
   return (
-    <div>ProjectItemContainer</div>
+    <ProjectItemCard/>
   )
 }
 
