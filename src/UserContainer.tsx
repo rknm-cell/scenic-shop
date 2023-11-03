@@ -1,8 +1,9 @@
 import React from 'react'
+import UserCard from './UserCard'
 
 const UserContainer = () => {
   return (
-    <div>UserContainer</div>
+    <UserCard/>
   )
 }
 
