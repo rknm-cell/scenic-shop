@@ -1,11 +1,12 @@
 import React from 'react'
 
-const ProjectCard = () => {
+const ProjectCard = ({name, description, client}) => {
+  console.log(name, description, client)
   return (
     <>
-    <h1>{project.name}</h1>
+    <h1>{name}</h1>
     <p>{description}</p>
-    <p>{colors}</p>
+    <p>{client}</p>
     </>
   )
 }

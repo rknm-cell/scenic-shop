@@ -4,13 +4,18 @@
         "name": "Bakugan",
         "colors": ["pomegranate", "golden arch", "stone gray", "strawberry red"],
         "due_date": "November 15",
-        "client": "Saatchi x Saatchi"
+        "description": "3d printed sculptures for retail experience",
+        "client": "Saatchi x Saatchi",
+        "pictures": "bakugan pics",
+        "active": true
       },
       {
         "name": "Loro Piana",
         "colors": ["walnut stain"],
         "due_date": "September 30",
+        "description": "Wood tables and shelves for display of retail merchandise",
         "client": "Pard Group",
+        "pictures": "loro piana pics",
         "active": false
       }
     ]

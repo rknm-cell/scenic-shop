@@ -1,57 +1,53 @@
-import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Home from "./Home";
-import "./App.css";
-import { Projects } from "./Projects";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ProjectsContext } from './ProjectsContext'; // Import the context
+import Home from './Home';
+import Projects from './Projects';
+import NoPage from './NoPage';
 
 function App() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  
+
   useEffect(() => {
     // Define the URL of the API endpoint where your projects are hosted.
-    const apiUrl = 'https://api.example.com/projects'; // Replace with your API endpoint URL.
+    const apiUrl = "http://localhost:3000/projects"; // Replace with your API endpoint URL.
 
     fetch(apiUrl)
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         return response.json();
       })
-      .then(data => {
+      .then((data) => {
         setProjects(data);
+        console.log(data);
         setLoading(false);
       })
-      .catch(error => {
-        console.error('Error fetching data:', error);
+      .catch((error) => {
+        console.error("Error fetching data:", error);
         setLoading(false);
       });
   }, []);
 
+  function ProjectsWrapper({ projects }) {
+    return <Projects projects={projects} />;
+  }
+  
   return (
-    
     <>
+    <ProjectsContext.Provider value={{ projects, setProjects, loading }}>
       <Router>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-                <Link to="/projects">Projects</Link>
-                <Link to="/clients">Clients</Link>
-              </li>
-            </ul>
-          </nav>
-
-          <Route path="/">
-            <Home />
-          </Route>
-          <Route path="/projects">
-            <Projects projects={projects}/>
-          </Route>
-        </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects/*" element={<Projects />} />
+          <Route path="*" element={<NoPage />} />
+        </Routes>
       </Router>
+    </ProjectsContext.Provider>
     </>
   );
 }
